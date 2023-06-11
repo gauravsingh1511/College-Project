@@ -15,16 +15,16 @@ def faces():
     face_cascade=cv2.CascadeClassifier('cascades/haarcascade_frontalface_alt2.xml')
     eye_cascade=cv2.CascadeClassifier('cascades/haarcascade_eye.xml')
     smile_cascade=cv2.CascadeClassifier('cascades/haarcascade_smile.xml')
-    recogniser = cv2.face.LBPHFaceRecognizer_create()
+    recognizer = cv2.face.LBPHFaceRecognizer_create()
     
-    recogniser.read('trainer.yml')
+    recognizer.read('trainer.yml')
     #loading label names...
     labels={'id':'1'}
     with open('labels.pickle','rb') as file:
         org_labels=pickle.load(file)
         labels={v:k for k,v in org_labels.items()}
 
-    capture=cv2.VideoCapture(2)
+    capture=cv2.VideoCapture(0)
     
     while(True):
         #reading the video frames...
@@ -37,7 +37,7 @@ def faces():
             roi_color=frame[y:y+h,x:x+w]#[ycord start x,ycord end]        
         
             #recognising now
-            id_,conf =recogniser.predict(roi_gray)
+            id_,conf =recognizer.predict(roi_gray)
             if conf>=45  and conf<=85:
                 print(id_)
                 print(conf)
@@ -66,8 +66,8 @@ def faces():
                     cv2.putText(frame,name,(200,380),font,1,color2,stroke,cv2.LINE_AA)
                     cv2.putText(frame,tcountry,(200,420),font,1,color2,stroke,cv2.LINE_AA)
                     cv2.putText(frame,tabout,(200,460),font,1,color3,stroke,cv2.LINE_AA)
-                    #engine.say(" terrorist recognised ")
-                    #engine.runAndWait()
+                    engine.say(" terrorist recognised ")
+                    engine.runAndWait()
                 except:
                     un='unknown'
                     cv2.putText(frame,un,(y,x-50),font,1,color,stroke,cv2.LINE_AA)

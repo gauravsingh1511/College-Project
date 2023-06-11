@@ -5,16 +5,13 @@ import cv2
 import pickle
 import pyttsx3 as p
 
-
-
-
                               #defining cascade classifier..........
 #face cascade=vc2.CascadeClassifier("D:\my python\6th sem\my project work\face recognition\cascades\data\haarcascade_frontalface_alt2.xml")
 engine=p.init()
 
 def train():
     face_cascade=cv2.CascadeClassifier('cascades/haarcascade_frontalface_alt2.xml')
-    recogniser = cv2.face.LBPHFaceRecognizer_create()
+    recognizer = cv2.face.LBPHFaceRecognizer_create()
 
     basedir=os.path.dirname(os.path.abspath(__file__))
     image_dir = os.path.join(basedir,'images')
@@ -60,5 +57,5 @@ def train():
     with open('labels.pickle','wb') as file:
         pickle.dump(label_ids,file)         
             
-        recogniser.train(x_train,np.array(y_labels))
-        recogniser.save("trainer.yml")               
+        recognizer.train(x_train,np.array(y_labels))
+        recognizer.save("trainer.yml")               

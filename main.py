@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Feb  1 11:34:01 2020
-
-@author: balu
-"""
-
 from tkinter import *
 import datetime
 from tkinter import ttk
